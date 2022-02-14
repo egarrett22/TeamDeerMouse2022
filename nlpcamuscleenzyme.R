@@ -1,3 +1,11 @@
+library(devtools)
+library(ggbiplot)
+library(pcaMethods)
+library(Biobase)
+library(factoextra)
+library(GEOquery)
+library(mixOmics)
+
 ##NLPCA method
 ##in the vignette for using inputation methods, this NLPCA method is what is suggested for use with enzyme activity data (the reasoning behind why I chose to use this method)
 musclenzresNLPCA <- pca(MuscleenzymePCAdata, method="nlpca", center=FALSE, nPcs=25, maxSteps=300)
