@@ -38,6 +38,8 @@ NLPCAmusclenz.pca$x[,3]
 var <- get_pca_var(NLPCAmusclenz.pca)
 var
 head(var$contrib, 30)
+##get the individual % contribution for each variable 
+contribs<-var$contrib
 
 library("corrplot")
 corrplot(var$contrib, is.corr=FALSE)  
@@ -77,7 +79,7 @@ fviz_pca_ind(NLPCAmusclenz.pca, pointsize = "cos2",
              repel = TRUE # Avoid text overlapping (slow if many points)
 )
 
-install.packages("RColorBrewer")
+
 library(RColorBrewer)
 fviz_pca_ind(NLPCAmusclenz.pca,
              geom.ind = "point", # show points only (nbut not "text")
@@ -94,9 +96,25 @@ fviz_pca_ind(NLPCAmusclenz.pca, geom.ind = "point", col.ind = MuscleenzymePCAdat
              addEllipses = TRUE, ellipse.type = "confidence",
              legend.title = "Groups"
 )
+##ellipse level 0.95
+fviz_pca_ind(NLPCAmusclenz.pca, geom.ind = "point", col.ind = MuscleenzymePCAdata$pop, 
+             palette = "Drak2",
+             addEllipses = TRUE,ellipse.type = "confidence" , ellipse.level=0.95, 
+             legend.title ="Group"
+)
 
-
-
+##convex ellipse
+fviz_pca_ind(NLPCAmusclenz.pca, geom.ind = "point", col.ind = MuscleenzymePCAdata$pop, 
+             palette = "Drak2",
+             addEllipses = TRUE,ellipse.type = "convex" , ellipse.level=0.95, 
+             legend.title ="Group"
+)
+##normal distribution
+fviz_pca_ind(NLPCAmusclenz.pca, geom.ind = "point", col.ind = MuscleenzymePCAdata$pop, 
+             palette = "Drak2",
+             addEllipses = TRUE,ellipse.type = "norm" , ellipse.level=0.95, 
+             legend.title ="Group"
+)
 
 gpop5 <- ggbiplot(NLPCAmusclenz.pca, obs.scale = 1, var.scale = 1, groups = MuscleenzymePCAdata[,2], ellipse = TRUE, circle = TRUE)
 gpop5
